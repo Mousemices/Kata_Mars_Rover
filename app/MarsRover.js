@@ -66,7 +66,7 @@ class MarsRover{
             this.moveBackward(command);
         }
     }
-    moveForward(command)
+    moveForward()
     {
         if(this.direction === 'N'){
             this.y--;
@@ -81,7 +81,7 @@ class MarsRover{
             this.x--;
         }
     }
-    moveBackward(command)
+    moveBackward()
     {
         if(this.direction === 'N'){
             this.y++;
