@@ -7,27 +7,17 @@ class MarsRover{
         this.compass = 'NESO';
         this.compassIndex = 0;
     }
+
     getPosition()
     {
         return [this.x, this.y];
     }
+
     getDirection()
     {
         return this.direction;
     }
-    rotate(commands)
-    {
-        this.compassIndex = this.compass.indexOf(this.getDirection());
 
-        for (let i = 0; i < commands.length; i++) {
-            if(commands[i] === 'L') {
-                this.rotateToLeft();
-            }
-            if(commands[i] === 'R') {
-                this.rotateToRight();
-            }
-        }
-    }
     execute(commands)
     {
         for (let i = 0; i < commands.length; i++){
@@ -39,6 +29,24 @@ class MarsRover{
             }
         }
     }
+
+    rotate(command)
+    {
+        this.updateCompassIndex();
+
+        if(command === 'L') {
+            this.rotateToLeft();
+            return;
+        }
+        this.rotateToRight();
+
+
+    }
+
+    updateCompassIndex() {
+        this.compassIndex = this.compass.indexOf(this.getDirection());
+    }
+
     rotateToLeft()
     {
         this.minusCompassIndex();
@@ -47,25 +55,32 @@ class MarsRover{
             //To do, 'this.compass.length - 1' put in function.
             this.compassIndex = this.compassLength();
         }
+        this.updateDirection();
+    }
+
+    updateDirection() {
         this.direction = this.compass.charAt(this.compassIndex);
     }
+
     rotateToRight()
     {
         this.addCompassIndex();
         if(this.compassIndex > this.compassLength()){
             this.compassIndex = 0;
         }
-        this.direction = this.compass.charAt(this.compassIndex);
+        this.updateDirection();
     }
+
     move(command)
     {
         if(command === 'F'){
             this.moveForward(command);
+            return;
         }
-        if(command === 'B') {
-            this.moveBackward(command);
-        }
+        this.moveBackward(command);
+
     }
+
     moveForward()
     {
         if(this.direction === 'N'){
@@ -81,6 +96,7 @@ class MarsRover{
             this.x--;
         }
     }
+
     moveBackward()
     {
         if(this.direction === 'N'){
@@ -96,17 +112,21 @@ class MarsRover{
             this.x++;
         }
     }
+
     minusCompassIndex()
     {
         this.compassIndex--;
     }
+
     addCompassIndex()
     {
         this.compassIndex++;
     }
+
     compassLength()
     {
         return this.compass.length - 1;
     }
 }
+
 module.exports=MarsRover;

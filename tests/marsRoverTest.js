@@ -4,14 +4,16 @@ const MarsRover = require('../app/MarsRover');
 
 describe('Mars Rover', function()
 {
-    it('return  position', function()
+    it('return position', function()
     {
         const rover = new MarsRover();
         const [x, y] = rover.getPosition();
-        expect([0, 0]).to.deep.equal([x, y]);
+        const defaultX = 0;
+        const defaultY = 0;
+        expect([defaultX, defaultY]).to.deep.equal([x, y]);
     });
 
-    it('return  direction', function()
+    it('return direction', function()
     {
         const rover = new MarsRover();
         const direction = rover.getDirection();
